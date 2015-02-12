@@ -49,6 +49,7 @@ CREATE TABLE `clinica`.`consulta`(
 	`ci` VARCHAR(15) NOT NULL COMMENT 'carnet de identidad del cliente', 
 	`id_us_r` INT(11) NOT NULL COMMENT 'identificador de usuario que registro la consulta', 
 	`id_us_a` INT(11) NOT NULL COMMENT 'identificador de usuario que realizo la consulta', 
+	`estado` int(1) DEFAULT '0' COMMENT 'Flag para determinar si la consulta fue o no atendida',
 	PRIMARY KEY (`id_con`), 
 	CONSTRAINT `rel_consulta_persona` FOREIGN KEY (`ci`) 
 	REFERENCES `clinica`.`persona`(`ci`) 
