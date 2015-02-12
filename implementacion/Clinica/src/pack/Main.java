@@ -5,6 +5,8 @@
  */
 package pack;
 
+import utils.ManagerArchivo;
+
 /**
  *
  * @author CKN
@@ -17,5 +19,10 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+    public static String user;
+    public static String host;
+    public static String db;
+    public static String password;
+    public static String dirDoc;
+    public static ManagerArchivo managerArchivo = new ManagerArchivo();
 }
