@@ -5,6 +5,7 @@
  */
 package pack;
 
+import utils.Conexion;
 import utils.ManagerArchivo;
 
 /**
@@ -17,7 +18,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        con = Conexion.getInstance();
     }
     public static String user;
     public static String host;
@@ -25,4 +26,5 @@ public class Main {
     public static String password;
     public static String dirDoc;
     public static ManagerArchivo managerArchivo = new ManagerArchivo();
+    public static Conexion con;
 }
