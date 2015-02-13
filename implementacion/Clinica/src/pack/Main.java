@@ -7,6 +7,7 @@ package pack;
 
 import data.Persona;
 import domains.ManagerPersona;
+import gui.GuiPersona;
 import utils.Conexion;
 import utils.ManagerArchivo;
 
@@ -21,7 +22,6 @@ public class Main {
      */
     public static void main(String[] args) {
         con = Conexion.getInstance();
-        System.out.println(ManagerPersona.listarPersonas("", true));
     }
     public static String user;
     public static String host;
