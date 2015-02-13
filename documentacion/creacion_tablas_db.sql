@@ -84,5 +84,6 @@ CREATE TABLE `clinica`.`esp_us`(
 CREATE TABLE `backup` (
 	`id_ba` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de modificacion a la base de datos',
 	`sql` text NOT NULL COMMENT 'comando sql ejecutado en la base de datos por el sistema',
-	PRIMARY KEY (`id_ba`)
+	`fecha_hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'fecha y hora del servidor en que se hizo la modificacion a la db',
+  	PRIMARY KEY (`id_ba`)
 );
