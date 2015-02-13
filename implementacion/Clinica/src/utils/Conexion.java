@@ -13,7 +13,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import pack.Main;
 
@@ -53,7 +52,7 @@ public class Conexion {
                     + "DE PERSISTIR EL PROBLEMA \n"
                     + "CONTACTE CON EL ADMINISTRADOR DE SISTEMAS",
                     "ERROR AL INTENTAR CONECTAR A LA BASE DE DATOS", JOptionPane.ERROR_MESSAGE);
-            ManagerArchivo.escribirLog("[" + new Date() + "] ERROR AL INTENTAR CONECTAR A LA BASE DE DATOS ->" + ex.getMessage());
+            ManagerArchivo.escribirLog("ERROR AL INTENTAR CONECTAR A LA BASE DE DATOS ->" + ex.getMessage());
             System.exit(0);
         }
     }
@@ -69,7 +68,7 @@ public class Conexion {
             return true;
         } catch (Exception ex) {
             System.out.println("Error en la ejecucion de: " + consulta + "\n" + ex.getMessage());
-            ManagerArchivo.escribirLog("[" + new Date() + "] ERROR AL EJECUTAR SQL :'" + consulta + "' :" + ex.getMessage());
+            ManagerArchivo.escribirLog("ERROR AL EJECUTAR SQL :'" + consulta + "' :" + ex.getMessage());
             ex.printStackTrace();
             return false;
         }
@@ -81,7 +80,7 @@ public class Conexion {
             rs = stm.executeQuery(consulta);
         } catch (Exception ex) {
             System.out.println("Error realizar la Consutla: \n" + consulta + "\n" + ex.getMessage());
-            ManagerArchivo.escribirLog("[" + new Date() + "] ERROR AL EJECUTAR SQL :'" + consulta + "' :" + ex.getMessage());
+            ManagerArchivo.escribirLog("ERROR AL EJECUTAR SQL :'" + consulta + "' :" + ex.getMessage());
             ex.printStackTrace();
         }
         return rs;
@@ -93,7 +92,7 @@ public class Conexion {
             stm.executeUpdate(consulta);
         } catch (Exception ex) {
             System.out.println("Error en la ejecucion de: " + consulta + "\n" + ex.getMessage());
-            ManagerArchivo.escribirLog("[" + new Date() + "] ERROR AL EJECUTAR SQL :'" + consulta + "' :" + ex.getMessage());
+            ManagerArchivo.escribirLog("ERROR AL EJECUTAR SQL :'" + consulta + "' :" + ex.getMessage());
         }
     }
 }

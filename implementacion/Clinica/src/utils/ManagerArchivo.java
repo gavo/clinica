@@ -13,26 +13,21 @@ import pack.Main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ManagerArchivo {
 
     public ManagerArchivo() {
         try {
-            escribirLog("[" + new Date() + "] INICIO DEL PROGRAMA");
+            escribirLog("INICIO DEL PROGRAMA");
             FileReader fr = null;
             BufferedReader br = null;
             ArrayList<String> lineas = new ArrayList<String>();
@@ -61,12 +56,12 @@ public class ManagerArchivo {
                 fr.close();
             }
         } catch (Exception e) {
-            escribirLog("[" + new Date() + "] ERROR al abrir Archivo de Configuracion (estudio_juridico.conf)" + e.getMessage());
-            escribirLog("[" + new Date() + "] Programa Finalizado -> Revise archivo: \"estudio_juridico.conf\"");
+            escribirLog("ERROR al abrir Archivo de Configuracion (estudio_juridico.conf)" + e.getMessage());
+            escribirLog("Programa Finalizado -> Revise archivo: \"estudio_juridico.conf\"");
         } finally {
             try {
             } catch (Exception e2) {
-                escribirLog("[" + new Date() + "] ERROR al cerrar archivo de configuracion " + e2.getMessage());
+                escribirLog("ERROR al cerrar archivo de configuracion " + e2.getMessage());
             }
         }
     }
@@ -108,7 +103,7 @@ public class ManagerArchivo {
             }
             try {
                 if (map.containsKey(etiqueta.toString().toLowerCase())) {
-                    escribirLog("[" + new Date() + "] ADVERTENCIA: El sistema se inicio con la etiqueta \"" + etiqueta + "\" duplicada: Revise ");
+                    escribirLog("ADVERTENCIA: El sistema se inicio con la etiqueta \"" + etiqueta + "\" duplicada: Revise ");
                 } else {
                     map.put(etiqueta.toLowerCase(), valor);
                 }
@@ -129,10 +124,10 @@ public class ManagerArchivo {
     }
 
     public static void escribirLog(String s) {
-        s = s.toUpperCase();
+        s = "[" + new Date().toString().toUpperCase() + "] "+s.toUpperCase();
         BufferedWriter out = null;
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             File file = new File("clinica.log");
             if (!file.exists()) {
                 if (file.createNewFile()) {
