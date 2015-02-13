@@ -59,9 +59,30 @@ public abstract class SQL {
         }
         return false;
     }
-    
+
 // REGISTRO DE SQL EJECUTADO EN LA DB
     public static String backup(String sql) {
         return "INSERT INTO `backup`(`sql`)VALUES(\"" + sql + "\");";
+    }
+
+// CONSULTAS Y MODIFICACIONES PARA LA TABLA DE PERSONAS
+    public static String listarPersonaCi(String ci) {
+        return "SELECT * FROM persona WHERE ci LIKE '%" + ci + "%';";
+    }
+
+    public static String listarPersonaNombre(String nombre) {
+        return "SELECT * FROM persona WHERE CONCAT(persona.`nombres`,' ',persona.`apellidos`,' ',persona.`apellido_materno`) LIKE '%" + nombre + "%';";
+    }
+
+    public static String buscarPersona(String ci) {
+        return "SELECT * FROM `persona` WHERE `ci` = '" + ci + "';";
+    }
+
+    public static String registrarPersona(String ci, String nombres, String apellidos, String direccion, String telefono) {
+        return "INSERT INTO persona(ci,nombres,apellidos,direccion,telefono)VALUES('" + ci + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "');";
+    }
+
+    public static String actualizarPersona(String ci, String nombres, String apellidos, String direccion, String telefono) {
+        return "UPDATE persona SET `nombres`='" + nombres + "', `apellidos`='" + apellidos + "',`direccion`='" + direccion + "',`telefono`='" + telefono + "' WHERE `ci`='" + ci + "';";
     }
 }
