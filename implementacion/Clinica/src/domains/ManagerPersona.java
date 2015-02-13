@@ -53,12 +53,14 @@ public abstract class ManagerPersona {
     public static void insertarPersona(Persona p) {
         if (SQL.pregunta("Desea registrar a \"" + p.getNombres() + " " + p.getApellidos() + "\" En la Base de Datos")) {
             Main.con.ejecutar(SQL.registrarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()));
+            ManagerArchivo.escribirLog("Persona Registrada->"+p);
         }
     }
 
     public static void actualizarPersona(Persona p) {
         if (SQL.pregunta("Desea actualizar los datos de \"" + p.getNombres() + " " + p.getApellidos()+ "\" En la Base de Datos")) {
             Main.con.ejecutar(SQL.actualizarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()));
+            ManagerArchivo.escribirLog("Datos de Persona Modificada->"+p);
         }
     }
 

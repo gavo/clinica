@@ -127,7 +127,6 @@ public class ManagerArchivo {
         s = "[" + new Date().toString().toUpperCase() + "] "+s.toUpperCase();
         BufferedWriter out = null;
         try {
-            //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             File file = new File("clinica.log");
             if (!file.exists()) {
                 if (file.createNewFile()) {

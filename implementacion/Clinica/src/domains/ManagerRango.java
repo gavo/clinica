@@ -7,12 +7,10 @@ package domains;
 
 import data.Rango;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pack.Main;
+import utils.ManagerArchivo;
 import utils.SQL;
 
 /**
@@ -41,6 +39,7 @@ public abstract class ManagerRango {
             }
         }else{
             JOptionPane.showMessageDialog(null, "Existe otro rango con el mismo nombre registrado en la DB", "Error al Registrar Rango", JOptionPane.ERROR_MESSAGE);
+            ManagerArchivo.escribirLog("No se pudo registrar el Rango ->"+rango);
         }
     }
     
@@ -48,9 +47,11 @@ public abstract class ManagerRango {
         if(buscarRango(rango.getNombre())==null){
             if (SQL.pregunta("Desea Modificar el rango \"" + rango.getNombre() + "\" En la Base de Datos")) {
                 Main.con.ejecutar(SQL.modificarRango(rango.getId_ra(),rango.getNombre()));
+                ManagerArchivo.escribirLog("Rango modificado ->"+rango);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Existe otro rango con el mismo nombre registrado en la DB", "Error al Modificar Rango", JOptionPane.ERROR_MESSAGE);
+            ManagerArchivo.escribirLog("Se intento modificar rango sin exito ->"+rango);
         }
     }
     
