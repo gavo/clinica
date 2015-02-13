@@ -5,8 +5,6 @@
  */
 package pack;
 
-import data.Persona;
-import domains.ManagerPersona;
 import gui.GuiPersona;
 import utils.Conexion;
 import utils.ManagerArchivo;
@@ -30,4 +28,5 @@ public class Main {
     public static String dirDoc;
     public static ManagerArchivo managerArchivo = new ManagerArchivo();
     public static Conexion con;
+    public static GuiPersona guiPersona;
 }

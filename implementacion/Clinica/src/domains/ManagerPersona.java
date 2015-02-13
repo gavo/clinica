@@ -17,7 +17,7 @@ import utils.SQL;
  *
  * @author CKN
  */
-public class ManagerPersona {
+public abstract class ManagerPersona {
 
     public static ArrayList<Persona> listarPersonas(String palabra, boolean f) {
         ArrayList<Persona> p = new ArrayList();
@@ -39,7 +39,6 @@ public class ManagerPersona {
 
     public static Persona buscarPersona(String ci) {
         Persona persona = null;
-        int id_tit = 0;
         ResultSet rs = Main.con.consultar(SQL.buscarPersona(ci));
         try {
             while (rs.next()) {
