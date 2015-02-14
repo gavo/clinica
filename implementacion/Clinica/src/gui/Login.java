@@ -5,7 +5,6 @@
  */
 package gui;
 
-import data.Usuario;
 import domains.ManagerUsuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
