@@ -15,7 +15,9 @@ CREATE TABLE `usuario`(
 	`id_us` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de usuario',
 	`user` VARCHAR(30) NOT NULL COMMENT 'usuario que se utilizara para loguear la cuenta',
 	`pass` VARCHAR(40) NOT NULL COMMENT 'password que se utilizara para autentificar la cuenta',
+	`tipo` int(1) NOT NULL COMMENT 'tipo de Usuario (Valores establecidos en el sistema 0,1,2)',
 	`ci` VARCHAR(15) NOT NULL COMMENT 'Ci de persona ligada a la cuenta',
+	`estado` int(1) NOT NULL DEFAULT '1' COMMENT 'Estado de la cuenta (0 inactivo, 1 activo)',
 	PRIMARY KEY (`id_us`),
 	CONSTRAINT `rel_usuario_persona` 
 	FOREIGN KEY (`ci`) REFERENCES `persona`(`ci`) 
