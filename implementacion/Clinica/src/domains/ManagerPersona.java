@@ -8,7 +8,7 @@ package domains;
 import data.Persona;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
+import javax.swing.JOptionPane;
 import pack.Main;
 import utils.ManagerArchivo;
 import utils.SQL;
@@ -32,7 +32,7 @@ public abstract class ManagerPersona {
                 p.add(new Persona(rs.getString("ci"), rs.getString("nombres"), rs.getString("apellidos"), rs.getString("direccion"), rs.getString("telefono")));
             }
         } catch (Exception ex) {
-            ManagerArchivo.escribirLog("[" + new Date() + "] ERROR AL LISTAR PERSONAS: " + ex.getMessage());
+            ManagerArchivo.escribirLog("ERROR: No se pudo Registrar Persona ->" + p + " " + ex.getMessage());
         }
         return p;
     }
@@ -52,15 +52,25 @@ public abstract class ManagerPersona {
 
     public static void insertarPersona(Persona p) {
         if (SQL.pregunta("Desea registrar a \"" + p.getNombres() + " " + p.getApellidos() + "\" En la Base de Datos")) {
-            Main.con.ejecutar(SQL.registrarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()));
-            ManagerArchivo.escribirLog("Persona Registrada->"+p);
+            if (Main.con.ejecutar(SQL.registrarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()))) {
+                ManagerArchivo.escribirLog("Persona Registrada->" + p);
+                JOptionPane.showMessageDialog(null, "Los Datos de la Persona \n" + p + "\nFueron Registrados Correctamente", "Persona Registrada Correctamente", JOptionPane.INFORMATION_MESSAGE);             
+            } else {
+                ManagerArchivo.escribirLog("ERROR: No se pudo Registrar Persona ->" + p);
+                JOptionPane.showMessageDialog(null, "Los Datos de la Persona \n" + p + "\nNo pudieron ser Registrados", "Error al Registrar Persona", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     public static void actualizarPersona(Persona p) {
-        if (SQL.pregunta("Desea actualizar los datos de \"" + p.getNombres() + " " + p.getApellidos()+ "\" En la Base de Datos")) {
-            Main.con.ejecutar(SQL.actualizarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()));
-            ManagerArchivo.escribirLog("Datos de Persona Modificada->"+p);
+        if (SQL.pregunta("Desea actualizar los datos de \"" + p.getNombres() + " " + p.getApellidos() + "\" En la Base de Datos")) {
+            if (Main.con.ejecutar(SQL.actualizarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()))) {
+                ManagerArchivo.escribirLog("Datos de Persona Modificada->" + p);
+                JOptionPane.showMessageDialog(null, "Los datos de la persona: \n" + p + "\nFueron actualizados Correctamente", "Datos Actualizados Correctamente", JOptionPane.OK_OPTION);
+            } else {
+                ManagerArchivo.escribirLog("ERROR: No se pudo actualizar los datos de la Persona");
+                JOptionPane.showMessageDialog(null, "Los Datos de la Persona \n" + p + "\nNo pudieron ser Actualizados", "Error al Actualizar datos de Persona", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

@@ -52,12 +52,12 @@ public class ManagerArchivo {
                 }
             }
             this.procesarCadena(lineas);
-            if (null != fr) {
+            if (fr != null) {
                 fr.close();
             }
         } catch (Exception e) {
-            escribirLog("ERROR al abrir Archivo de Configuracion (estudio_juridico.conf)" + e.getMessage());
-            escribirLog("Programa Finalizado -> Revise archivo: \"estudio_juridico.conf\"");
+            escribirLog("ERROR al abrir Archivo de Configuracion (clinica.conf)" + e.getMessage());
+            escribirLog("Programa Finalizado -> Revise archivo: \"clinica.conf\"");
         } finally {
             try {
             } catch (Exception e2) {
@@ -118,20 +118,20 @@ public class ManagerArchivo {
             Main.password = map.get("password").toString();
             Main.dirDoc = map.get("dirdoc").toString();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error en Lectura de Archivo", "ERROR al leer archivo de configuracion: " + e.getMessage(),JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error en Lectura de Archivo", "ERROR al leer archivo de configuracion: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
 
     public static void escribirLog(String s) {
-        s = "[" + new Date().toString().toUpperCase() + "] "+s.toUpperCase();
+        s = "[" + new Date().toString().toUpperCase() + "] " + s.toUpperCase();
         BufferedWriter out = null;
         try {
             File file = new File("clinica.log");
             if (!file.exists()) {
                 if (file.createNewFile()) {
                     out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF8"));
-                    out.write((String)("[" + new Date() + "] Creacion Log de Programa \"clinica.log\"").toUpperCase());
+                    out.write((String) ("[" + new Date() + "] Creacion Log de Programa \"clinica.log\"").toUpperCase());
                     out.newLine();
                     out.close();
                     file = new File("clinica.log");
@@ -145,7 +145,7 @@ public class ManagerArchivo {
             out.close();
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al Escribir en el LOG", "No se pudo Escribir en el archivo de log \n"+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al Escribir en el LOG", "No se pudo Escribir en el archivo de log \n" + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 out.close();
