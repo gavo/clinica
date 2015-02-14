@@ -47,7 +47,7 @@ CREATE TABLE `consulta`(
 ); 
 
 CREATE TABLE `especialidad`(  
-	`id_es` INT(11) NOT NULL COMMENT 'identificador del usuario que atendera',
+	`id_es` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador del usuario que atendera',
 	`nombre` VARCHAR(50) COMMENT 'especialidad en la que se atendera',
 	`costo` FLOAT(11) NOT NULL DEFAULT 0 COMMENT 'costo de la consulta',
 	PRIMARY KEY (`id_es`)
