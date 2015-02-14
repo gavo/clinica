@@ -104,6 +104,27 @@ public abstract class SQL {
     }
 
     public static String BuscarUsuario(String user) {
-        return "SELECT * FROM usuario WHERE `user`='"+user+"';";
+        return "SELECT * FROM usuario WHERE `user`='" + user + "';";
+    }
+
+// CONSULTAS Y MODIFICACIONES PARA LA TABLA ESPECIALIDADES
+    public static String listarEspecialidades() {
+        return "SELECT * FROM especialidad;";
+    }
+
+    public static String BuscarEspecialidad(String nombre) {
+        return "SELECT * FROM especialidad WHERE nombre = '" + nombre + "'";
+    }
+
+    public static String BuscarEspecialidad(int id) {
+        return "SELECT * FROM especialidad WHERE id_es ='" + id + "'";
+    }
+
+    public static String registrarEspecialidad(String nombre, float costo) {
+        return "INSERT INTO especialidad(nombre,costo)values('" + nombre + "','" + costo + "')";
+    }
+
+    public static String actualizarEspecialidad(int id_es, String nombre, float costo) {
+        return "UPDATE especialidad SET nombre='" + nombre + "', costo='" + costo + "' WHERE id_es = '" + id_es + "'";
     }
 }
