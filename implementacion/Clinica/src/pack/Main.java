@@ -7,6 +7,7 @@ package pack;
 
 import data.Usuario;
 import gui.GuiPersona;
+import gui.Login;
 import utils.Conexion;
 import utils.ManagerArchivo;
 
@@ -21,7 +22,13 @@ public class Main {
      */
     public static void main(String[] args) {
         con = Conexion.getInstance();
+        Login l = new Login();
     }
+    
+    public static void iniciarSecion(){
+        //no implementado todavia
+    }
+    
     public static String user;
     public static String host;
     public static String db;
