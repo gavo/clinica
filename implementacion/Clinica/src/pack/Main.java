@@ -5,6 +5,7 @@
  */
 package pack;
 
+import data.Usuario;
 import gui.GuiPersona;
 import utils.Conexion;
 import utils.ManagerArchivo;
@@ -29,4 +30,5 @@ public class Main {
     public static ManagerArchivo managerArchivo = new ManagerArchivo();
     public static Conexion con;
     public static GuiPersona guiPersona;
+    public static Usuario usuario;
 }

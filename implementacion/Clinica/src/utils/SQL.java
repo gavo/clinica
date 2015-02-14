@@ -88,6 +88,22 @@ public abstract class SQL {
 
     // CONSULTAS Y MODIFICACIONES PARA LA TABLA USUARIOS
     public static String BuscarUsuario(int id_us) {
-        return "SELECT * FROM usuarios WHERE id_us = '" + id_us + "'";
+        return "SELECT * FROM usuario WHERE id_us = '" + id_us + "'";
+    }
+
+    public static String registrarUsuario(String user, String pass, int tipo, String ci) {
+        return "INSERT INTO usuario(`user`,`pass`,`tipo`,`ci`)VALUES('" + user + "','" + sha1(pass) + "','" + tipo + "','" + ci + "');";
+    }
+
+    public static String autenticarUsuario(String user, String pass) {
+        return "SELECT * FROM usuario WHERE `user`='" + user + "' AND `pass`='" + sha1(pass) + "'";
+    }
+
+    public static String actualizarUsuario(int id, String user, String pass, int tipo, String ci, int estado) {
+        return "UPDATE usuario SET `user`='" + user + "', `pass`='" + sha1(pass) + "',`tipo`='" + tipo + "',`ci`='" + ci + "',`estado`='" + estado + "' WHERE `id_us`='" + id + "'";
+    }
+
+    public static String BuscarUsuario(String user) {
+        return "SELECT * FROM usuario WHERE `user`='"+user+"';";
     }
 }
