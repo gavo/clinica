@@ -66,7 +66,7 @@ public abstract class ManagerPersona {
         if (SQL.pregunta("Desea actualizar los datos de \"" + p.getNombres() + " " + p.getApellidos() + "\" En la Base de Datos")) {
             if (Main.con.ejecutar(SQL.actualizarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()))) {
                 ManagerArchivo.escribirLog("Datos de Persona Modificada->" + p);
-                JOptionPane.showMessageDialog(null, "Los datos de la persona: \n" + p + "\nFueron actualizados Correctamente", "Datos Actualizados Correctamente", JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(null, "Los datos de la persona: \n" + p + "\nFueron actualizados Correctamente", "Datos Actualizados Correctamente", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 ManagerArchivo.escribirLog("ERROR: No se pudo actualizar los datos de la Persona");
                 JOptionPane.showMessageDialog(null, "Los Datos de la Persona \n" + p + "\nNo pudieron ser Actualizados", "Error al Actualizar datos de Persona", JOptionPane.ERROR_MESSAGE);
