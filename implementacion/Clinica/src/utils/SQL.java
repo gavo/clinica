@@ -86,20 +86,8 @@ public abstract class SQL {
         return "UPDATE persona SET `nombres`='" + nombres + "', `apellidos`='" + apellidos + "',`direccion`='" + direccion + "',`telefono`='" + telefono + "' WHERE `ci`='" + ci + "';";
     }
 
-    // CONSULTAS Y MODIFICACIONES PARA LA TABLA RANGO
-    public static String registrarRango(String nombre) {
-        return "INSERT INTO rango(nombre)VALUES('" + nombre + "');";
-    }
-
-    public static String buscarRango(String nombreRango) {
-        return "SELECT * FROM rango WHERE nombre = '" + nombreRango + "'";
-    }
-
-    public static String listarRangos() {
-        return "SELECT * FROM rango";
-    }
-
-    public static String modificarRango(int id_ra, String nombre) {
-        return "UPDATE rango SET nombre='" + nombre + "' WHERE id_ra='" + id_ra + "';";
+    // CONSULTAS Y MODIFICACIONES PARA LA TABLA USUARIOS
+    public static String BuscarUsuario(int id_us) {
+        return "SELECT * FROM usuarios WHERE id_us = '" + id_us + "'";
     }
 }
