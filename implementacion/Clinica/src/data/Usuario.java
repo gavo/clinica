@@ -11,9 +11,9 @@ package data;
  */
 public class Usuario {
 
-    public static int ADMIN_SIS = 2;
-    public static int DOCTOR = 1;
-    public static int SECRETARIA = 0;
+    public static final int ADMIN_SIS = 2;
+    public static final int DOCTOR = 1;
+    public static final int SECRETARIA = 0;
     private int id_us;
     private String user;
     private String pass;
