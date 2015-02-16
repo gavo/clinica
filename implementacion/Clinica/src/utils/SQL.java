@@ -127,4 +127,33 @@ public abstract class SQL {
     public static String actualizarEspecialidad(int id_es, String nombre, float costo) {
         return "UPDATE especialidad SET nombre='" + nombre + "', costo='" + costo + "' WHERE id_es = '" + id_es + "'";
     }
+
+// CONSULTAS Y MODIFICACIONES A LA TABLA ESUS
+    public static String registrarEsUs(int id_es, int id) {
+        return "INSERT INTO esp_us(id_es,id_us)VALUES('" + id_es + "','" + id + "');";
+    }
+
+    public static String BuscarEspUs(int id_es, int id) {
+        return "SELECT * FROM esp_us WHERE id_es='" + id_es + "' AND id_us='" + id + "'";
+    }
+
+    public static String ActivarEspUs(int id_es, int id) {
+        return "UPDATE esp_us SET activa='1' WHERE id_es='" + id_es + "' AND id_us='" + id + "'";
+    }
+
+    public static String DesctivarEspUs(int id_es, int id) {
+        return "UPDATE esp_us SET activa='0' WHERE id_es='" + id_es + "' AND id_us='" + id + "'";
+    }
+
+    public static String listarEspUs() {
+        return "SELECT * FROM esp_us WHERE activa='1'";
+    }
+
+    public static String listarUsuariosEspecialidad(int id_es) {
+        return "SELECT * FROM esp_us WHERE activa='1' AND id_es='" + id_es + "'";
+    }
+
+    public static String listarEspecialidadUsuarios(int id_us) {
+        return "SELECT * FROM esp_us WHERE activa='1' AND id_us='" + id_us + "'";
+    }
 }
