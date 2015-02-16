@@ -107,6 +107,10 @@ public abstract class SQL {
         return "SELECT * FROM usuario WHERE `user`='" + user + "';";
     }
 
+    public static String BuscarUsuarios(String user) {
+        return "SELECT * FROM usuario WHERE `user` like '%" + user + "%';";
+    }
+
 // CONSULTAS Y MODIFICACIONES PARA LA TABLA ESPECIALIDADES
     public static String listarEspecialidades() {
         return "SELECT * FROM especialidad;";
