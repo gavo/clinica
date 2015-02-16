@@ -56,6 +56,7 @@ CREATE TABLE `especialidad`(
 CREATE TABLE `esp_us`(  
 	`id_es` INT(11) NOT NULL COMMENT 'identificador de especialidad',
 	`id_us` INT(11) NOT NULL COMMENT 'identificador de usuario',
+	`activa` INT(1) NOT NULL DEFAULT '1' COMMENT 'Flag que identifica si la especialidad esta activa o no (0:inactiva, 1:Activa)',
 	PRIMARY KEY (`id_es`, `id_us`),
 	CONSTRAINT `esp_us_especialidad` FOREIGN KEY (`id_es`) 
 	REFERENCES `especialidad`(`id_es`) 
