@@ -57,9 +57,9 @@ public class EspUs {
     @Override
     public String toString() {
         if (activa == ACTIVA) {
-            return "EspUs ACTIVA{" + "esp=" + esp.getNombre() + ", us=" + us.getUser() + "" + us.getPersona().getNombres() + " " + us.getPersona().getApellidos() + '}';
+            return "ACTIVA{" + "esp=" + esp.getNombre() + ", us=" + us.getUser() + "" + us.getPersona().getNombres() + " " + us.getPersona().getApellidos() + '}';
         } else {
-            return "EspUs NoActiva{" + "esp=" + esp.getNombre() + ", us=" + us.getUser() + "" + us.getPersona().getNombres() + " " + us.getPersona().getApellidos() + '}';
+            return "NoActiva{" + "esp=" + esp.getNombre() + ", us=" + us.getUser() + "" + us.getPersona().getNombres() + " " + us.getPersona().getApellidos() + '}';
         }
 
     }
