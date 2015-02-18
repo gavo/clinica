@@ -154,10 +154,10 @@ public abstract class SQL {
     }
 
     public static String listarUsuariosEspecialidad(int id_es) {
-        return "SELECT * FROM esp_us WHERE activa='1' AND id_es='" + id_es + "'";
+        return "SELECT * FROM esp_us WHERE id_es='" + id_es + "'";
     }
 
     public static String listarEspecialidadUsuarios(int id_us) {
-        return "SELECT * FROM esp_us WHERE activa='1' AND id_us='" + id_us + "'";
+        return "SELECT * FROM esp_us WHERE id_us='" + id_us + "'";
     }
 }
