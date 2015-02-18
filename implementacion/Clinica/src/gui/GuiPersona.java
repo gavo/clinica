@@ -18,7 +18,9 @@ public class GuiPersona extends javax.swing.JFrame {
      * Creates new form GuiPersona
      */
     private static GuiPersona myInstance;
+    private static int padre;
     private Persona p;
+    public static final int GuiAddUsuario = 0;
 
     private GuiPersona() {
         super("Registrando Persona");
@@ -49,14 +51,16 @@ public class GuiPersona extends javax.swing.JFrame {
         }
     }
 
-    public static GuiPersona get() {
+    public static GuiPersona get(int P) {
+        padre = P;
         if (myInstance == null) {
             myInstance = new GuiPersona();
         }
         return myInstance;
     }
 
-    public static GuiPersona get(Persona p) {
+    public static GuiPersona get(Persona p, int P) {
+        padre = P;
         myInstance = new GuiPersona(p);
         return myInstance;
     }
@@ -202,6 +206,11 @@ public class GuiPersona extends javax.swing.JFrame {
             this.p.setTelefono(jTextField5.getText().toUpperCase());
             ManagerPersona.actualizarPersona(this.p);
         }
+        if (padre == GuiPersona.GuiAddUsuario) {
+            gui.GuiAddUsuario.p = p;
+            gui.GuiAddUsuario.jLabel6.setText(p.getNombres() + " " + p.getApellidos());
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
