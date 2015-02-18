@@ -6,6 +6,7 @@
 package pack;
 
 import data.Usuario;
+import gui.GuiAddUsuario;
 import gui.GuiPersona;
 import gui.Login;
 import utils.Conexion;
@@ -38,4 +39,5 @@ public class Main {
     public static Conexion con;
     public static GuiPersona guiPersona;
     public static Usuario usuario;
+    public static GuiAddUsuario guiAddUsuario;
 }
