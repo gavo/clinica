@@ -25,6 +25,10 @@ public class Especialidad {
         this.costo = costo;
     }
 
+    public Especialidad(){
+        //constructor sin parametros
+    }
+    
     public int getId_es() {
         return id_es;
     }
