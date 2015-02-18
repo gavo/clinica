@@ -7,6 +7,7 @@ package domains;
 
 import data.Usuario;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import pack.Main;
 import utils.ManagerArchivo;
@@ -54,6 +55,24 @@ public abstract class ManagerUsuario {
         return u;
     }
 
+    public static ArrayList<Usuario> buscarUsuarios(String user) {
+        ArrayList<Usuario> u = new ArrayList();
+        ResultSet rs = Main.con.consultar(SQL.BuscarUsuarios(user));
+        ArrayList<String> ci = new ArrayList();
+        try {
+            while (rs.next()) {
+                u.add(new Usuario(rs.getInt("id_us"), rs.getString("user"), rs.getString("pass"), rs.getInt("tipo"), rs.getInt("estado")));
+                ci.add(rs.getString("ci"));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        for (int i = 0; i < u.size(); i++) {
+            u.get(i).setPersona(ManagerPersona.buscarPersona(ci.get(i)));
+        }
+        return u;
+    }
+
     public static void registrarUsuario(Usuario u) {
         if (buscarUsuario(u.getUser()) == null) {
             if (SQL.pregunta("Desea agregar el usuario " + u + " a la Base de Datos")) {
@@ -90,19 +109,42 @@ public abstract class ManagerUsuario {
     }
 
     public static void actualizarUsuario(Usuario u) {
-        if (buscarUsuario(u.getUser()) == null) {
-            if (SQL.pregunta("Desea actualizar los datos del usuario " + u.getUser())) {
-                if (Main.con.ejecutar(SQL.actualizarUsuario(u.getId(), u.getUser(), u.getPass(), u.getTipo(), u.getPersona().getCi(), u.getEstado()))) {
-                    ManagerArchivo.escribirLog("Usuario Modificado en la Base de datos ->" + u);
-                    JOptionPane.showMessageDialog(null, "El Usuario " + u.getUser() + " Fue modificado Correctamente a la DB", "Usuario Actualizado Correctamente", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    ManagerArchivo.escribirLog("Error: No se pudo modificar el usuario " + u.getUser() + " En la Base de datos");
-                    JOptionPane.showMessageDialog(null, "No se pudo modificar el usuario \n" + u.getUser() + "\nEn la Base de datos", "Error al Modificar Usuario", JOptionPane.ERROR_MESSAGE);
-                }
+        if (SQL.pregunta("Desea actualizar los datos del usuario " + u.getUser())) {
+            if (Main.con.ejecutar(SQL.actualizarUsuario(u.getId(), u.getUser(), u.getPass(), u.getTipo(), u.getPersona().getCi(), u.getEstado()))) {
+                ManagerArchivo.escribirLog("Usuario Modificado en la Base de datos ->" + u);
+                JOptionPane.showMessageDialog(null, "El Usuario " + u.getUser() + " Fue modificado Correctamente a la DB", "Usuario Actualizado Correctamente", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                ManagerArchivo.escribirLog("Error: No se pudo modificar el usuario " + u.getUser() + " En la Base de datos");
+                JOptionPane.showMessageDialog(null, "No se pudo modificar el usuario \n" + u.getUser() + "\nEn la Base de datos", "Error al Modificar Usuario", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            ManagerArchivo.escribirLog("No se puede actualizar los datos del usuario ->" + u + " porque los datos ya estan siendo utilizados");
-            JOptionPane.showMessageDialog(null, "No se pudo modificar el usuario \n" + u.getUser() + "\nEn la Base de datos", "Error al Modificar Usuario", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public static String tipoUsuario(int t) {
+        if (t == Usuario.ADMIN_SIS) {
+            return "ADMIN_SIS";
+        }
+        if (t == Usuario.DOCTOR) {
+            return "DOCTOR";
+        }
+        if (t == Usuario.SECRETARIA) {
+            return "SECRETARIA";
+        }
+        return "TIPO ERRONEO";
+    }
+
+    public static String estadoUsuario(int t) {
+        if (t == 0) {
+            return "INACTIVO";
+        }
+        if (t == 1) {
+            return "ACTIVO";
+        }
+        return "ESTADO ERRONEO";
+    }
+
+    public static Object[] parseVector(Usuario u) {
+        Object[] o = {u.getId(), u.getUser(), tipoUsuario(u.getTipo()), u.getPersona().getNombres() + " " + u.getPersona().getApellidos(), estadoUsuario(u.getEstado())};
+        return o;
     }
 }
