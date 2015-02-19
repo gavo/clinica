@@ -26,7 +26,7 @@ CREATE TABLE `usuario`(
 
 CREATE TABLE `consulta`( 
 	`id_con` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de consulta', 
-	`registrado` DATETIME NOT NULL COMMENT 'fecha en que se regitroo la consulta', 
+	`registrado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'fecha en que se regitroo la consulta',
 	`atencion` DATETIME NOT NULL COMMENT 'fecha en que se realizo la atencion', 
 	`costo` FLOAT(11) NOT NULL DEFAULT 0 COMMENT 'costo de la consulta', 
 	`detalle` TEXT COMMENT 'detalle de lo diagnosticado y visto en la consulta', 
