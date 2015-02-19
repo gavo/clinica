@@ -137,7 +137,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         i--;
-        Main.usuario = ManagerUsuario.autentificar(jTextField1.getText().toUpperCase(), jPasswordField1.getText().toUpperCase());
+        Main.usuario = ManagerUsuario.autentificar(jTextField1.getText().toUpperCase(), jPasswordField1.getText());
         if (Main.usuario != null) {
             ManagerArchivo.escribirLog("Sesion Iniciada Por el Usuario ->"+Main.usuario);
             Main.iniciarSecion();
