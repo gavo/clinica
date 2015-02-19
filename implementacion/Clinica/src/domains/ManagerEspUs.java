@@ -60,12 +60,12 @@ public abstract class ManagerEspUs {
         return r;
     }
 
-    public static EspUs instanciarEspUs(Especialidad e,Usuario u) {
+    public static EspUs instanciarEspUs(Especialidad e, Usuario u) {
         ResultSet rs = Main.con.consultar(SQL.BuscarEspUs(e.getId_es(), u.getId()));
         EspUs eu = null;
         try {
             while (rs.next()) {
-                eu = new EspUs(e,u,rs.getInt("activa"));
+                eu = new EspUs(e, u, rs.getInt("activa"));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -75,7 +75,6 @@ public abstract class ManagerEspUs {
     }
 
     public static void cambiarEstadoEspUs(EspUs eu) {
-        System.out.println(eu.getActiva());
         if (eu.getActiva() == EspUs.INACTIVA) {
             if (SQL.pregunta("Desea activar la especialidad " + eu.getEsp().getNombre() + " para el usuario " + eu.getUs())) {
                 if (Main.con.ejecutar(SQL.ActivarEspUs(eu.getEsp().getId_es(), eu.getUs().getId()))) {
@@ -119,35 +118,48 @@ public abstract class ManagerEspUs {
 
     public static ArrayList<EspUs> listarEspUs(Especialidad e) {
         ArrayList<EspUs> lista = new ArrayList();
-        ArrayList<Integer> laux = new ArrayList();
+        ArrayList<Integer[]> laux = new ArrayList();
         ResultSet rs = Main.con.consultar(SQL.listarUsuariosEspecialidad(e.getId_es()));
         try {
             while (rs.next()) {
-                laux.add(rs.getInt("id_us"));
+                Integer[]aux = {rs.getInt("id_us"),rs.getInt("activa")};
+                laux.add(aux);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        for (int i = 0; i < laux.size(); i++) {
-            lista.add(new EspUs(e, ManagerUsuario.buscarUsuario(laux.get(i))));
+        for (Integer[] aux1: laux) {
+            lista.add(new EspUs(e, ManagerUsuario.buscarUsuario(aux1[0]),aux1[1]));
         }
         return lista;
     }
 
     public static ArrayList<EspUs> listarEspUs(Usuario u) {
         ArrayList<EspUs> lista = new ArrayList();
-        ArrayList<Integer> laux = new ArrayList();
+        ArrayList<Integer[]> laux = new ArrayList();
         ResultSet rs = Main.con.consultar(SQL.listarEspecialidadUsuarios(u.getId()));
         try {
             while (rs.next()) {
-                laux.add(rs.getInt("id_es"));
+                Integer[]aux = {rs.getInt("id_es"),rs.getInt("activa")};
+                laux.add(aux);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        for (int i : laux) {
-            lista.add(new EspUs(ManagerEspecialidad.buscarEspecialidad(i), u));
+        for (Integer i[] : laux) {
+            lista.add(new EspUs(ManagerEspecialidad.buscarEspecialidad(i[0]), u,i[1]));
         }
         return lista;
+    }
+
+    public static Object[] listarEspUsUsuario(EspUs eu) {
+        String activa = "";
+        if (eu.getActiva() == EspUs.ACTIVA) {
+            activa = "Activa";
+        } else {
+            activa = "Inactiva";
+        }
+        Object[] o = {eu.getUs().getUser(), ManagerPersona.NombreCompleto(eu.getUs().getPersona()), activa};
+        return o;
     }
 }
