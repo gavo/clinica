@@ -54,7 +54,7 @@ public abstract class ManagerPersona {
         if (SQL.pregunta("Desea registrar a \"" + p.getNombres() + " " + p.getApellidos() + "\" En la Base de Datos")) {
             if (Main.con.ejecutar(SQL.registrarPersona(p.getCi(), p.getNombres(), p.getApellidos(), p.getDireccion(), p.getTelefono()))) {
                 ManagerArchivo.escribirLog("Persona Registrada->" + p);
-                JOptionPane.showMessageDialog(null, "Los Datos de la Persona \n" + p + "\nFueron Registrados Correctamente", "Persona Registrada Correctamente", JOptionPane.INFORMATION_MESSAGE);             
+                JOptionPane.showMessageDialog(null, "Los Datos de la Persona \n" + p + "\nFueron Registrados Correctamente", "Persona Registrada Correctamente", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 ManagerArchivo.escribirLog("ERROR: No se pudo Registrar Persona ->" + p);
                 JOptionPane.showMessageDialog(null, "Los Datos de la Persona \n" + p + "\nNo pudieron ser Registrados", "Error al Registrar Persona", JOptionPane.ERROR_MESSAGE);
@@ -83,5 +83,9 @@ public abstract class ManagerPersona {
             p.getTelefono()
         };
         return r;
+    }
+
+    public static String NombreCompleto(Persona p) {
+        return p.getNombres() + " " + p.getApellidos();
     }
 }
