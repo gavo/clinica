@@ -6,6 +6,7 @@
 package pack;
 
 import data.Usuario;
+import domains.ManagerUsuario;
 import gui.GuiAddUsuario;
 import gui.GuiPersona;
 import gui.Login;
