@@ -5,9 +5,12 @@
  */
 package utils;
 
+import data.Consulta;
+import data.Usuario;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -159,5 +162,18 @@ public abstract class SQL {
 
     public static String listarEspecialidadUsuarios(int id_us) {
         return "SELECT * FROM esp_us WHERE id_us='" + id_us + "'";
+    }
+
+    public static String listarUsuarios(int id_es) {
+        return "SELECT usuario.* FROM esp_us INNER JOIN usuario ON esp_us.`id_us` = usuario.`id_us` WHERE esp_us.`id_es` = '" + id_es + "';";
+    }
+
+    // Consultas y modificaciones a la tabla consulta
+    public static String consultarNFicha(Date Fecha) {
+        return "SELECT COUNT(id_con)+1 ficha FROM consulta WHERE atencion LIKE '"+SQL.formatDates.format(Fecha)+"%' AND estado='" + Consulta.PENDIENTE + "';";
+    }
+
+    public static String registrarConsulta(String atencion, float costo, String ci, int id, int id_us_a) {
+        return "INSERT INTO `consulta` (`atencion`, `costo`, `ci`, `id_us_r`, `id_us_a`) VALUES ('"+atencion+"', '"+costo+"', '"+ci+"', '"+id+"', '"+id_us_a+"'); ";
     }
 }
