@@ -162,4 +162,22 @@ public abstract class ManagerEspUs {
         Object[] o = {eu.getUs().getUser(), ManagerPersona.NombreCompleto(eu.getUs().getPersona()), activa};
         return o;
     }
+    
+    public static ArrayList<Usuario> listarUsuarios(Especialidad e){
+        ArrayList<Usuario> usuarios = new ArrayList();
+        ArrayList<String> ltemp = new ArrayList();
+        ResultSet rs = Main.con.consultar(SQL.listarUsuarios(e.getId_es()));
+        try {
+            while(rs.next()){
+                usuarios.add(new Usuario(rs.getInt("id_us"),rs.getString("user"),rs.getInt("tipo"),rs.getInt("estado")));
+                ltemp.add(rs.getString("ci"));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        for(int i=0;i<ltemp.size();i++){
+            usuarios.get(i).setPersona(ManagerPersona.buscarPersona(ltemp.get(i)));
+        }
+        return usuarios;
+    }
 }
