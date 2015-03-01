@@ -38,11 +38,18 @@ public class Usuario {
         this.persona = null;
         this.tipo = tipo;
     }
-    
+
     public Usuario(String user, String pass, int tipo, Persona persona) {
         this.user = user;
         this.pass = pass;
         this.persona = persona;
+        this.tipo = tipo;
+    }
+
+    public Usuario(int id,String user, int tipo, int estado) {
+        this.id_us = id;
+        this.user = user;
+        this.estado = estado;
         this.tipo = tipo;
     }
 
