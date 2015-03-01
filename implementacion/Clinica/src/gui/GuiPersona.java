@@ -30,6 +30,15 @@ public class GuiPersona extends javax.swing.JFrame {
         jButton1.setText("Registrar Datos Persona");
     }
 
+    private GuiPersona(String ci) {
+        super("Registrando Persona");
+        initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        jButton1.setText("Registrar Datos Persona");
+        jTextField1.setText(ci);
+    }
+
     private GuiPersona(Persona p) {
         super("Registrando Persona");
         initComponents();
@@ -59,9 +68,14 @@ public class GuiPersona extends javax.swing.JFrame {
         return myInstance;
     }
 
-    public static GuiPersona get(Persona p, int P) {
+    public static GuiPersona get(String ci, int P) {
         padre = P;
-        myInstance = new GuiPersona(p);
+        Persona p = ManagerPersona.buscarPersona(ci);
+        if (p == null) {
+            myInstance = new GuiPersona(ci);
+        } else {
+            myInstance = new GuiPersona(p);
+        }
         return myInstance;
     }
 
