@@ -228,9 +228,10 @@ public class GuiAddUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        p = ManagerPersona.buscarPersona(JOptionPane.showInputDialog("Ingrese El CI. De la Persona que sera Dueño de la Cuenta"));
+        String ci = JOptionPane.showInputDialog("Ingrese El CI. De la Persona que sera Dueño de la Cuenta");
+        p = ManagerPersona.buscarPersona(ci);
         if (p == null) {
-            Main.guiPersona = GuiPersona.get(p, GuiPersona.GuiAddUsuario);
+            Main.guiPersona = GuiPersona.get(ci, GuiPersona.GuiAddUsuario);
         } else {
             jLabel6.setText(p.getNombres() + " " + p.getApellidos());
         }
