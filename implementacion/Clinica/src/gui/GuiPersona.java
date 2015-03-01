@@ -21,7 +21,8 @@ public class GuiPersona extends javax.swing.JFrame {
     private static int padre;
     private Persona p;
     public static final int GuiAddUsuario = 0;
-
+    public static final int GuiRegistrarConsulta = 1;
+    
     private GuiPersona() {
         super("Registrando Persona");
         initComponents();
@@ -29,7 +30,7 @@ public class GuiPersona extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jButton1.setText("Registrar Datos Persona");
     }
-
+    
     private GuiPersona(String ci) {
         super("Registrando Persona");
         initComponents();
@@ -38,7 +39,7 @@ public class GuiPersona extends javax.swing.JFrame {
         jButton1.setText("Registrar Datos Persona");
         jTextField1.setText(ci);
     }
-
+    
     private GuiPersona(Persona p) {
         super("Registrando Persona");
         initComponents();
@@ -59,7 +60,7 @@ public class GuiPersona extends javax.swing.JFrame {
             jButton1.setText("Registrar Datos Persona");
         }
     }
-
+    
     public static GuiPersona get(int P) {
         padre = P;
         if (myInstance == null) {
@@ -67,7 +68,7 @@ public class GuiPersona extends javax.swing.JFrame {
         }
         return myInstance;
     }
-
+    
     public static GuiPersona get(String ci, int P) {
         padre = P;
         Persona p = ManagerPersona.buscarPersona(ci);
@@ -78,7 +79,7 @@ public class GuiPersona extends javax.swing.JFrame {
         }
         return myInstance;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -223,6 +224,10 @@ public class GuiPersona extends javax.swing.JFrame {
         if (padre == GuiPersona.GuiAddUsuario) {
             gui.GuiAddUsuario.p = p;
             gui.GuiAddUsuario.jLabel6.setText(p.getNombres() + " " + p.getApellidos());
+        }
+        if (padre == GuiPersona.GuiRegistrarConsulta) {
+            gui.GuiRegistrarConsulta.p = p;
+            gui.GuiRegistrarConsulta.jLabel7.setText(p.getNombres() + " " + p.getApellidos());
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
