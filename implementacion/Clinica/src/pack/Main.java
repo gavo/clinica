@@ -8,7 +8,9 @@ package pack;
 import data.Usuario;
 import domains.ManagerUsuario;
 import gui.GuiAddUsuario;
+import gui.GuiAdminUsuarios;
 import gui.GuiPersona;
+import gui.GuiRegistrarConsulta;
 import gui.Login;
 import utils.Conexion;
 import utils.ManagerArchivo;
@@ -24,7 +26,9 @@ public class Main {
      */
     public static void main(String[] args) {
         con = Conexion.getInstance();
-        Login l = new Login();
+        //Login l = new Login();
+        usuario = ManagerUsuario.buscarUsuario(1);
+        new GuiRegistrarConsulta();
     }
     
     public static void iniciarSecion(){
