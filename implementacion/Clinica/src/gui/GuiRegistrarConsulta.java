@@ -239,8 +239,14 @@ public class GuiRegistrarConsulta extends javax.swing.JFrame {
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
         if (jDateChooser1.getDate() != null) {
-            jButton1.setEnabled(true);
-            jLabel6.setText(ManagerConsulta.numeroFichaSiguiente(jDateChooser1.getDate()) + "");
+            if (p == null) {
+                jDateChooser1.setDate(null);
+                JOptionPane.showMessageDialog(rootPane, "No Ha seleccionado ninguna persona para la Consulta", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                jButton1.setEnabled(true);
+                jLabel6.setText(ManagerConsulta.numeroFichaSiguiente(jDateChooser1.getDate()) + "");
+            }
         }
     }//GEN-LAST:event_jDateChooser1PropertyChange
 
@@ -249,7 +255,7 @@ public class GuiRegistrarConsulta extends javax.swing.JFrame {
         p = ManagerPersona.buscarPersona(ci);
         if (p == null) {
             Main.guiPersona = GuiPersona.get(ci, GuiPersona.GuiRegistrarConsulta);
-        }else{
+        } else {
             jLabel7.setText(p.getNombres() + " " + p.getApellidos());
         }
     }//GEN-LAST:event_jLabel7MouseClicked
